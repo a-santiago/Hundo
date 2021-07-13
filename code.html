@@ -22,7 +22,7 @@
 <body class="d-flex flex-column h-100">
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <div class="container-fluid">
+        <div class="container-fluid mb">
             <a class="navbar-brand" href="/index.html">Hundo</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
                 aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,10 +48,130 @@
     </nav>
 
     <main class="flex-shrink-0">
-        <div class="container">
-            <h1 class="mt-5">Template with dark fixed navbar and sticky footer</h1>
-            <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and
-                CSS. A fixed navbar has been added with padding-top: 60px; on the main > .container.</p>
+        <div class="container col-xxl-8 px-4 py-5 mt-5">
+            <h2 class="border-2 border-bottom border-dark pt-5">Code</h2>
+            <div class="row">
+                <div class="col" id="codeCol">
+
+                    <pre>
+                        <code class="language-javascript line-numbers">
+//Whenever you see a {} think that whatever in between is working
+
+
+function getNumbers() {
+    //access the webpage and get the value from the inputs
+    let startValue = document.getElementById("startValue").value;
+    let endValue = document.getElementById("endValue").value;
+
+    // The above lines can be used in a parseInt
+    //parseFloat is a decimal function
+    //while parseInt is an interger function
+    //The example below this line is the parseInt example
+    let newStart = parseInt(startValue)
+    let newEnd = parseInt(endValue)
+
+    let errorState = false;
+    let errorMsg = "";
+
+    if (isNaN(newStart) || isNaN(newEnd)) {
+        errorState = true;
+        errorMsg += "Please use numbers&lt;hr/>"
+        }
+
+    if (newStart > newEnd) {
+        errorState = true;
+        errorMsg += "Start value must be less than end value&lt;hr/>"
+        }
+    if (newStart > 10000 || newStart &lt; -10000 || newEnd > 10000 || newEnd &lt; -10000) {
+        errorState = true;
+        errorMsg += "-10,000 and 10,000 are the limit&lt;hr/>"
+    }
+
+    if (errorState) {
+        Swal.fire(
+        'Uh Oh!',
+        'Something went wrong',
+        'Error'
+    )
+    }
+    //take the start and end values as the bounds fro a "for" loop
+    // that will create an array and return it
+    let numbers = generateNumbers(newStart, newEnd);
+
+    //take the array that was returned and pass it to a function that will
+    //display it
+
+    displayNumbers(numbers);
+
+    }
+
+    //Wrapper Function/method - a funtion that calls other functions
+    function generateNumbers(newStart, newEnd) {
+        let numbers = [];
+
+    //loop over number from startValue to endValue
+    for (let index = newStart; index &lt;= newEnd; index++) {
+        numbers.push(index);
+        }
+
+    return numbers;
+    }
+
+    function displayNumbers(numbers) {
+        let className = "even";
+        let templateRows = "";
+
+    for (let index = 0; index &lt; numbers.length; index++) {
+        let number = numbers[index];
+    //% means the remainder of a division
+        if (number % 2 == 0) {
+        className = "even"[]
+        } else {
+    className = "odd"
+    }
+
+    templateRows += `&lt;tr>&lt;td class="${className}">${number}&lt;/td>&lt;/tr>`;
+    }
+
+    document.getElementById("output").innerHTML = templateRows
+    }
+    </code></pre>
+
+                </div>
+
+
+
+        <div class="col" id="explainCol">
+            <h3 class="fw-bolder text-decoration-underline">The code is structured in three functions.</h3>
+            <h5 class="text-decoration-underline">getValues</h5>
+            <p>getValues accepts(gets) the user input from the page. It utilizes
+                <strong>getElementById</strong>
+                to pull the values from the page. It passes those values to the
+                <strong>generateNumbers</strong>
+                function. The function <strong>generateNumbers</strong> returns an array of values and
+                passes
+                that array to the <strong>displayNumbers</strong> function.</p>
+            <h5 class="text-decoration-underline">generateNumbers</h5>
+            <p>generateNumbers takes in two parameters startValue and endValue. We create a variable
+                (numbers)
+                that holds an array. A for loop is used to generate all of the numbers between
+                <strong>startValue</strong> and <strong>endValue</strong></p>
+            <h5 class="text-decoration-underline">displayNumbers</h5>
+            <p>displayNumbers takes in one parameter numbers. The variable numbers is an array the holds
+                values
+                between <strong>startValue</strong> and <strong>endValue</strong>. We create a variable
+                (className) that holds the name of a CSS class that we will use to bold the numbers. We
+                create a
+                variable templateRows that will hold the html we will write to the page.</p>
+            <p>A for loop is used to check all of the numbers to see if they are even or odd. The remainder
+                operator
+                (%) is used to see if the number is divisable by two. If it returns zero the it is even. If
+                not (else) its odd. The
+                correct className is injected into the html row for display. Each interation of the loop
+                adds to
+                the teamplateRows variable. At the end of the loop the resulting HTML rows are written to
+                the page.
+            </p>
         </div>
     </main>
     <footer class="footer mt-auto py-3 bg-dark">

@@ -1,7 +1,8 @@
 /* CSS Comments are Ctrl + k + C */
 /* Uncomment is ctrl + K + U */
 
-main>.container {
+main>.container,
+main>.container-fluid {
     padding: 60px 15px 0;
 }
 
